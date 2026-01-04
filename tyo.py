@@ -8,7 +8,7 @@ from scipy.signal import butter, filtfilt
 
 st.title("Kävely")
 
-# ---------- KIIHTYVYYSDATA ----------
+# Luetaan kiityvyysdata
 df = pd.read_csv("https://raw.githubusercontent.com/t3vajo05/-Fysiikan-loppuprojekti/refs/heads/main/My%20Experiment/Linear%20Acceleration.csv")
 
 t = df["Time (s)"].values
@@ -16,7 +16,7 @@ x = df["Linear Acceleration x (m/s^2)"].values
 y = df["Linear Acceleration y (m/s^2)"].values
 z = df["Linear Acceleration z (m/s^2)"].values
 
-# ---------- SUODATUS ----------
+# Kiihtyvyysdatan suodatus ja piirto
 T_tot = t.max()
 n = len(t)
 fs = n / T_tot
@@ -39,7 +39,7 @@ plt.legend()
 
 st.pyplot(plt)
 
-# ---------- ASKELET SUODATUKSELLA ----------
+# Askelmäärä suodatuksesta
 askeleet = 0
 for i in range(1, len(filtered_data)):
     if filtered_data[i - 1] < 0 and filtered_data[i] >= 0:
@@ -47,7 +47,7 @@ for i in range(1, len(filtered_data)):
 
 st.write("Askelmäärä suodatuksen perusteella:", askeleet)
 
-# ---------- FOURIER-ANALYYSI ----------
+# Fourier-muunnos
 dt = t[1] - t[0]
 N = len(z)
 
@@ -71,7 +71,7 @@ askelmaara_fourier = int(dominant_freq * T_tot)
 
 st.write("Askelmäärä Fourier-analyysin perusteella:", askelmaara_fourier)
 
-# ---------- GPS-DATA ----------
+# Luetaan GPS-data
 gps = pd.read_csv("https://raw.githubusercontent.com/t3vajo05/-Fysiikan-loppuprojekti/refs/heads/main/My%20Experiment/Location.csv")
 
 lat = np.deg2rad(gps["Latitude (°)"].values)
@@ -90,11 +90,11 @@ kokonaismatka = np.sum(distances)
 
 st.write("Kokonaismatka (GPS-datasta):", round(kokonaismatka, 2), "m")
 
-# ---------- ASKELPITUUS ----------
+# Lasketaan askelpituus GPS-datasta
 askelpituus = kokonaismatka / askeleet
 st.write("Askelpituus:", round(askelpituus, 2), "m")
 
-# ---------- KARTTA ----------
+# Luodaan kartta
 start_lat = gps["Latitude (°)"].mean()
 start_lon = gps["Longitude (°)"].mean()
 
