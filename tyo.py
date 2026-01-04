@@ -9,7 +9,7 @@ from scipy.signal import butter, filtfilt
 st.title("Kävely")
 
 # ---------- KIIHTYVYYSDATA ----------
-df = pd.read_csv("./My Experiment/Linear Acceleration.csv")
+df = pd.read_csv("https://raw.githubusercontent.com/t3vajo05/-Fysiikan-loppuprojekti/refs/heads/main/My%20Experiment/Linear%20Acceleration.csv")
 
 t = df["Time (s)"].values
 x = df["Linear Acceleration x (m/s^2)"].values
@@ -72,7 +72,7 @@ askelmaara_fourier = int(dominant_freq * T_tot)
 st.write("Askelmäärä Fourier-analyysin perusteella:", askelmaara_fourier)
 
 # ---------- GPS-DATA ----------
-gps = pd.read_csv("./My Experiment/Location.csv")
+gps = pd.read_csv("https://raw.githubusercontent.com/t3vajo05/-Fysiikan-loppuprojekti/refs/heads/main/My%20Experiment/Location.csv")
 
 lat = np.deg2rad(gps["Latitude (°)"].values)
 lon = np.deg2rad(gps["Longitude (°)"].values)
